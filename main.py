@@ -3,7 +3,7 @@ import os
 import shutil
 import subprocess
 
-import git
+# import git
 
 # Get temp folder via API
 # rw_dir = os.path.join(os.getcwd(), "temp")
