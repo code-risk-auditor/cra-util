@@ -37,13 +37,13 @@ print("Current working dir is ", os.getcwd())
 
 # Install the requirements
 req_file = "requirements.txt"
-cmd = f'pip install -r {req_file}'
+cmd = f'pip3 install -r {req_file}'
 # subprocess.call(cmd, shell=True, executable='/bin/bash')
 subprocess.call(cmd, shell=True)
 
 # Second call for freeze
 print("Freeze")
-cmd = f'pip freeze'
+cmd = f'pip3 freeze'
 # result = subprocess.check_output(cmd, shell=True, executable='/bin/bash').decode("utf-8")
 result = subprocess.check_output(cmd, shell=True).decode("utf-8")
 
@@ -56,14 +56,17 @@ with open(f"{req_file}", "r") as f:
     for req in reqs:
         req = req.strip()
         if req:
-            if "==" in req:
-                dependency, version = req.split("==")
-                original_requirements[dependency] = version
-            elif ">=" in req:
-                dependency, version = req.split(">=")
-                original_requirements[dependency] = version
-            else:
-                print("Cannot parse line in req_file: ", req)
+            try:
+                if "==" in req:
+                    dependency, version = req.split("==")
+                    original_requirements[dependency] = version
+                elif ">=" in req:
+                    dependency, version = req.split(">=")
+                    original_requirements[dependency] = version
+                else:
+                    print("Cannot parse line in req_file: ", req)
+            except:
+                print("Unable to parse line: ", req)
 
 print("Parsed: {}".format(original_requirements))
 
@@ -80,11 +83,11 @@ print("Dependency tree")
 # cmd = f'source venv/bin/activate && pip install pipdeptree graphviz'
 # subprocess.call(cmd, shell=True, executable='/bin/bash', cwd=f"{rw_dir}/empty")
 
-cmd = f'pipdeptree -e pipdeptree --graph-output pdf > graph.pdf'
+cmd = f'python -m pipdeptree -e pipdeptree --graph-output pdf > graph.pdf'
 # result = subprocess.check_output(cmd, shell=True, executable='/bin/bash').decode("utf-8")
 result = subprocess.check_output(cmd, shell=True).decode("utf-8")
 
-cmd = f'pipdeptree -e pipdeptree,pip,setuptools,graphviz,packaging,GitPython,gitdb --json'
+cmd = f'python -m pipdeptree -e pipdeptree,pip,setuptools,graphviz,packaging,GitPython,gitdb --json'
 # result = subprocess.check_output(cmd, shell=True, executable='/bin/bash').decode("utf-8")
 result = subprocess.check_output(cmd, shell=True).decode("utf-8")
 
@@ -482,3 +485,9 @@ for package in deptree:
 dotfile += "}"
 
 print(dotfile)
+
+with open("graph.dot", "w") as f:
+    f.write(dotfile)
+
+cmd = f'dot -Tpdf graph.dot -o graph.pdf'
+subprocess.call(cmd, shell=True)
