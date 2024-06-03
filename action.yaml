@@ -17,6 +17,8 @@ runs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
+    - name: Install Graphviz
+      uses: tlylt/install-graphviz@v1
     - name: Install Dependencies
       run: pip install -r requirements.txt
       shell: bash
