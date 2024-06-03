@@ -73,9 +73,12 @@ print("Parsed: {}".format(original_requirements))
 
 # Parse the results
 for line in result.splitlines():
-    dependency, version = line.split("==")
+    try:
+        dependency, version = line.split("==")
 
-    print(f"Dependency: {dependency}, version: {version} {'*' if dependency in original_requirements else ''}")
+        print(f"Dependency: {dependency}, version: {version} {'*' if dependency in original_requirements else ''}")
+    except:
+        print("Unable to parse line: ", line)
 
 
 # Now do dependency tree
