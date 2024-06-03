@@ -30,14 +30,16 @@ print("Hello World")
 print("Current working dir is ", os.getcwd())
 
 # Install the requirements
-req_file = "requirements/default.txt"
-cmd = f'pwd && source venv/bin/activate && pip install -r {req_file}'
-subprocess.call(cmd, shell=True, executable='/bin/bash', cwd=f"{rw_dir}/empty")
+req_file = "requirements.txt"
+cmd = f'pip install -r {req_file}'
+subprocess.call(cmd, shell=True, executable='/bin/bash')
 
 # Second call for freeze
 print("Freeze")
-cmd = f'source venv/bin/activate && pip freeze'
-result = subprocess.check_output(cmd, shell=True, executable='/bin/bash', cwd=f"{rw_dir}/empty").decode("utf-8")
+cmd = f'pip freeze'
+result = subprocess.check_output(cmd, shell=True, executable='/bin/bash').decode("utf-8")
+
+print("After Freeze")
 
 # Parse req_file
 original_requirements = {}
