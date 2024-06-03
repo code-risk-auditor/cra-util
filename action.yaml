@@ -26,5 +26,5 @@ runs:
       shell: bash
     - name: Fetch the number's square
       id: get-square
-      run: python src/get_num_square.py
+      run: python main.py
       shell: bash

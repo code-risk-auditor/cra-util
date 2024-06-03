@@ -6,25 +6,28 @@ import subprocess
 import git
 
 # Get temp folder via API
-rw_dir = os.path.join(os.getcwd(), "temp")
-if os.path.exists(rw_dir):
-    shutil.rmtree(rw_dir)
-os.makedirs(rw_dir)
+# rw_dir = os.path.join(os.getcwd(), "temp")
+# if os.path.exists(rw_dir):
+#     shutil.rmtree(rw_dir)
+# os.makedirs(rw_dir)
+#
+#
+# empty_repo = git.Repo.init(os.path.join(rw_dir, "empty"))
+# origin = empty_repo.create_remote("origin","https://github.com/celery/django-celery-beat")
+#
+# assert origin.exists()
+#
+# origin.fetch()
+#
+# # Checkout master
+# empty_repo.create_head("main", origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
+#
+# # Now we can do a python env-things and install stuff
+# # Create a venv in the folder
+# os.system(f"python -m venv {rw_dir}/empty/venv")
 
-
-empty_repo = git.Repo.init(os.path.join(rw_dir, "empty"))
-origin = empty_repo.create_remote("origin","https://github.com/celery/django-celery-beat")
-
-assert origin.exists()
-
-origin.fetch()
-
-# Checkout master
-empty_repo.create_head("main", origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
-
-# Now we can do a python env-things and install stuff
-# Create a venv in the folder
-os.system(f"python -m venv {rw_dir}/empty/venv")
+print("Hello World")
+print("Current working dir is ", os.getcwd())
 
 # Install the requirements
 req_file = "requirements/default.txt"
