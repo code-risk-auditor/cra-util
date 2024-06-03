@@ -38,12 +38,14 @@ print("Current working dir is ", os.getcwd())
 # Install the requirements
 req_file = "requirements.txt"
 cmd = f'pip install -r {req_file}'
-subprocess.call(cmd, shell=True, executable='/bin/bash')
+# subprocess.call(cmd, shell=True, executable='/bin/bash')
+subprocess.call(cmd, shell=True)
 
 # Second call for freeze
 print("Freeze")
 cmd = f'pip freeze'
-result = subprocess.check_output(cmd, shell=True, executable='/bin/bash').decode("utf-8")
+# result = subprocess.check_output(cmd, shell=True, executable='/bin/bash').decode("utf-8")
+result = subprocess.check_output(cmd, shell=True).decode("utf-8")
 
 print("After Freeze")
 
@@ -79,10 +81,12 @@ print("Dependency tree")
 # subprocess.call(cmd, shell=True, executable='/bin/bash', cwd=f"{rw_dir}/empty")
 
 cmd = f'pipdeptree -e pipdeptree --graph-output pdf > graph.pdf'
-result = subprocess.check_output(cmd, shell=True, executable='/bin/bash').decode("utf-8")
+# result = subprocess.check_output(cmd, shell=True, executable='/bin/bash').decode("utf-8")
+result = subprocess.check_output(cmd, shell=True).decode("utf-8")
 
 cmd = f'pipdeptree -e pipdeptree,pip,setuptools,graphviz,packaging,GitPython,gitdb --json'
-result = subprocess.check_output(cmd, shell=True, executable='/bin/bash').decode("utf-8")
+# result = subprocess.check_output(cmd, shell=True, executable='/bin/bash').decode("utf-8")
+result = subprocess.check_output(cmd, shell=True).decode("utf-8")
 
 deptree = json.loads(result)
 

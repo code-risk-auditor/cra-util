@@ -3,7 +3,9 @@ ADD . /app
 WORKDIR /app
 
 # We need the bash
-RUN apt install bash
+RUN apt -y install bash
+# Install pip
+RUN python get-pip.py
 
 # We are installing a dependency here directly into our app source dir
 RUN pip install --target=/app requests
