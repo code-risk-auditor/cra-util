@@ -26,6 +26,12 @@ import subprocess
 # # Create a venv in the folder
 # os.system(f"python -m venv {rw_dir}/empty/venv")
 
+# Print all files in the current folder
+print("Files in current folder")
+print("Current workspace: ", os.getcwd())
+for file in os.listdir():
+    print(file)
+
 print("Hello World")
 print("Current working dir is ", os.getcwd())
 
