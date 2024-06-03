@@ -22,11 +22,7 @@ runs:
     - name: Install Dependencies
       run: pip install -r requirements.txt
       shell: bash
-    - name: Pass Inputs to Shell
-      run: |
-              echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
-      shell: bash
-    - name: Fetch the number's square
+    - name: Do the thing...
       id: get-square
       run: python main.py
       shell: bash
