@@ -43,7 +43,7 @@ print("After Freeze")
 
 # Parse req_file
 original_requirements = {}
-with open(f"{rw_dir}/empty/{req_file}", "r") as f:
+with open(f"{req_file}", "r") as f:
     reqs = f.readlines()
     for req in reqs:
         req = req.strip()
