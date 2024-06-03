@@ -69,14 +69,14 @@ for line in result.splitlines():
 
 # Now do dependency tree
 print("Dependency tree")
-cmd = f'source venv/bin/activate && pip install pipdeptree graphviz'
-subprocess.call(cmd, shell=True, executable='/bin/bash', cwd=f"{rw_dir}/empty")
+# cmd = f'source venv/bin/activate && pip install pipdeptree graphviz'
+# subprocess.call(cmd, shell=True, executable='/bin/bash', cwd=f"{rw_dir}/empty")
 
-cmd = f'source venv/bin/activate && pipdeptree -e pipdeptree --graph-output pdf > graph.pdf'
-result = subprocess.check_output(cmd, shell=True, executable='/bin/bash', cwd=f"{rw_dir}/empty").decode("utf-8")
+cmd = f'pipdeptree -e pipdeptree --graph-output pdf > graph.pdf'
+result = subprocess.check_output(cmd, shell=True, executable='/bin/bash').decode("utf-8")
 
-cmd = f'source venv/bin/activate && pipdeptree -e pipdeptree,pip,setuptools,graphviz,packaging --json'
-result = subprocess.check_output(cmd, shell=True, executable='/bin/bash', cwd=f"{rw_dir}/empty").decode("utf-8")
+cmd = f'pipdeptree -e pipdeptree,pip,setuptools,graphviz,packaging --json'
+result = subprocess.check_output(cmd, shell=True, executable='/bin/bash').decode("utf-8")
 
 deptree = json.loads(result)
 
